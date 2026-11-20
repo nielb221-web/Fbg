@@ -723,7 +723,7 @@
       width: 720px;
       max-width: 100%;
       margin: 0 auto;
-      padding: 20px 26px;
+      padding: 28px 34px;
       border: 2px solid #c68b4e;
       border-radius: 12px;
       position: relative;
@@ -734,45 +734,6 @@
     .invoice-pdf-clone {
       border-radius: 0 !important;
       border: 3px solid #c68b4e !important;
-      padding: 18px 24px !important;
-    }
-    .invoice-pdf-clone .inv-header {
-      padding-bottom: 10px !important;
-      margin-bottom: 11px !important;
-    }
-    .invoice-pdf-clone .inv-logo {
-      width: 58px !important;
-      height: 58px !important;
-    }
-    .invoice-pdf-clone .inv-table {
-      margin: 9px 0 !important;
-      font-size: 0.82rem !important;
-    }
-    .invoice-pdf-clone .inv-table th,
-    .invoice-pdf-clone .inv-table td {
-      padding: 8px 10px !important;
-    }
-    .invoice-pdf-clone .inv-payment-grid {
-      padding: 11px 13px !important;
-      margin-bottom: 11px !important;
-      gap: 14px !important;
-      grid-template-columns: 124px 1fr !important;
-    }
-    .invoice-pdf-clone .inv-qr-box img {
-      width: 104px !important;
-      height: 104px !important;
-    }
-    .invoice-pdf-clone .inv-pay-methods {
-      gap: 7px 10px !important;
-      font-size: 0.76rem !important;
-    }
-    .invoice-pdf-clone .inv-pay-item {
-      padding: 6px 9px !important;
-    }
-    .invoice-pdf-clone .inv-thankyou-box {
-      padding-top: 9px !important;
-      margin-top: 0 !important;
-      font-size: 0.8rem !important;
     }
     .inv-watermark-layer {
       position: absolute;
@@ -1042,11 +1003,10 @@
       </div>
 
       <div class="header-actions">
-        <button type="button" class="sync-pill" onclick="manualSyncNow()" style="cursor:pointer;" title="Tap to sync latest projects & settings with Google Drive">
+        <div class="sync-pill">
           <span class="dot" id="syncDot"></span>
           <span id="syncStatusText">Connected to Drive</span>
-          <span style="font-size:0.72rem; opacity:0.85;">↻</span>
-        </button>
+        </div>
 
         <button class="btn-secondary" onclick="togglePrivacyMask()" title="Hide/Show Financial Figures">
           <span id="eyeLabel">👁️ Hide ₹</span>
@@ -1054,10 +1014,6 @@
 
         <button class="btn-secondary" onclick="openExportModal()">
           📥 Export CSV
-        </button>
-
-        <button class="btn-secondary" onclick="openGsUrlModal()" title="Set or test Google Apps Script Web App URL">
-          🔗 GS Link
         </button>
 
         <button class="btn-secondary" onclick="openSettingsModal()">
@@ -1260,36 +1216,6 @@
       <span>Foodbonding • Roshni Ramani — Curated Cafe & Culinary Collaborations</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#dfb07a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 20c6.5 2.5 13.5 2.5 20 0L12 2z"/></svg>
     </footer>
-  <!-- ==================== GOOGLE APPS SCRIPT LINK MODAL ==================== -->
-  <div class="modal-backdrop" id="gsUrlModal">
-    <div class="modal-box" style="max-width:520px;">
-      <div class="modal-head">
-        <h2>🔗 Google Apps Script Link</h2>
-        <button class="close-btn" onclick="closeModal('gsUrlModal')">✕</button>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:14px;">
-        <p style="font-size:0.84rem; color:var(--text-muted);">
-          Paste your deployed Google Apps Script Web App URL (<code style="color:var(--gold-light);">.../exec</code>) to connect this device to Google Drive sync.
-        </p>
-        <div>
-          <label for="quickGsUrlInput">Web App URL</label>
-          <input type="url" id="quickGsUrlInput" placeholder="https://script.google.com/macros/s/.../exec" />
-        </div>
-        <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-          <button type="button" class="btn-secondary" onclick="testScriptConnection('quickGsUrlInput', 'quickGsUrlStatus')">🧪 Test Connection</button>
-          <button type="button" class="btn-secondary" onclick="resetDefaultGsUrl()">↺ Reset Default</button>
-        </div>
-        <div id="quickGsUrlStatus" style="font-size:0.8rem; color:var(--text-muted); background:#130d08; border:1px solid var(--border-subtle); border-radius:10px; padding:10px 12px;">
-          Ready to test or save your Apps Script URL.
-        </div>
-        <div style="display:flex; gap:10px; justify-content:flex-end; margin-top:4px;">
-          <button type="button" class="btn-secondary" onclick="closeModal('gsUrlModal')">Cancel</button>
-          <button type="button" class="btn-primary" onclick="saveQuickGsUrl()">Save & Sync Now</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
   </main>
 
   <!-- ==================== MODAL 1: ADD / EDIT COLLABORATION ==================== -->
@@ -1683,13 +1609,9 @@
         <button class="close-btn" onclick="closeModal('settingsModal')">✕</button>
       </div>
       <div style="display:flex; flex-direction:column; gap:13px;">
-        <div style="background:var(--bg-card-elevated); border:1px solid var(--border-subtle); border-radius:14px; padding:14px;">
-          <label for="settingsScriptUrl">🔗 Google Apps Script Web App URL (/exec)</label>
-          <div style="display:flex; gap:8px; flex-wrap:wrap;">
-            <input type="url" id="settingsScriptUrl" placeholder="https://script.google.com/macros/s/.../exec" style="flex:1; min-width:220px;" />
-            <button type="button" class="btn-secondary" onclick="testScriptConnection('settingsScriptUrl', 'settingsUrlStatus')">🧪 Test Link</button>
-          </div>
-          <div id="settingsUrlStatus" style="font-size:0.76rem; color:var(--text-muted); margin-top:6px;"></div>
+        <div>
+          <label for="settingsScriptUrl">Google Apps Script Web App URL</label>
+          <input type="url" id="settingsScriptUrl" />
         </div>
 
         <div>
@@ -1743,95 +1665,15 @@
 
   <div id="toastContainer"></div>
 
-  
   <script>
-    (function() {
-      var FB_USER = 'Foodbonding';
-      var FB_PASS = 'Roshni5160';
-      var FB_URL = 'https://script.google.com/macros/s/AKfycbwd103KnpeEDgMBDQXxRhOP3iOyFWAHZak7xJARpdKx5beWc2utRwNX2NhdthvO36hOvA/exec';
-      var FB_AUTH_KEY = 'foodbonding_logged_in_v1';
-      var FB_SCRIPT_KEY = 'foodbonding_script_url_v7';
-
-      function fbHasAuth() {
-        try { if (sessionStorage.getItem(FB_AUTH_KEY) === 'true') return true; } catch (e) {}
-        try { if (localStorage.getItem(FB_AUTH_KEY) === 'true') return true; } catch (e) {}
-        return false;
-      }
-
-      function fbSetAuth(v) {
-        try {
-          if (v) sessionStorage.setItem(FB_AUTH_KEY, 'true');
-          else sessionStorage.removeItem(FB_AUTH_KEY);
-        } catch (e) {}
-        try {
-          if (v) localStorage.setItem(FB_AUTH_KEY, 'true');
-          else localStorage.removeItem(FB_AUTH_KEY);
-        } catch (e) {}
-      }
-
-      function fbShowDashboard() {
-        var lv = document.getElementById('loginView');
-        var av = document.getElementById('appView');
-        if (lv) lv.style.setProperty('display', 'none', 'important');
-        if (av) av.style.setProperty('display', 'block', 'important');
-        if (typeof window.refreshAllUI === 'function') {
-          try { window.refreshAllUI(); } catch (e) {}
-        }
-        if (typeof window.syncFromCloud === 'function') {
-          try { window.syncFromCloud(); } catch (e) {}
-        }
-      }
-
-      function fbAttachHandler() {
-        var form = document.getElementById('loginForm');
-        if (!form || form.dataset.fbBound === '1') return;
-        form.dataset.fbBound = '1';
-        form.addEventListener('submit', function(ev) {
-          ev.preventDefault();
-          var uEl = document.getElementById('loginUser');
-          var pEl = document.getElementById('loginPass');
-          var sEl = document.getElementById('loginScriptUrl');
-          var errEl = document.getElementById('loginError');
-          var u = uEl ? (uEl.value || '').trim() : '';
-          var p = pEl ? (pEl.value || '') : '';
-          var s = sEl ? (sEl.value || '').trim() : '';
-
-          if (u.toLowerCase() === FB_USER.toLowerCase() && p === FB_PASS) {
-            try { localStorage.setItem(FB_SCRIPT_KEY, s || FB_URL); } catch (e) {}
-            fbSetAuth(true);
-            if (errEl) errEl.style.display = 'none';
-            fbShowDashboard();
-            if (typeof window.bootApp === 'function') {
-              try { window.bootApp(); } catch (e) {}
-            }
-          } else {
-            if (errEl) errEl.style.display = 'block';
-          }
-        }, true);
-      }
-
-      fbAttachHandler();
-      if (fbHasAuth()) fbShowDashboard();
-      document.addEventListener('DOMContentLoaded', function() {
-        fbAttachHandler();
-        if (fbHasAuth()) fbShowDashboard();
-      });
-      window.addEventListener('load', function() {
-        fbAttachHandler();
-        if (fbHasAuth()) fbShowDashboard();
-      });
-    })();
-  </script>
-
-<script>
     // ==================== CONFIG & STATE ====================
     const VALID_USER = 'Foodbonding';
     const VALID_PASS = 'Roshni5160';
-    const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwd103KnpeEDgMBDQXxRhOP3iOyFWAHZak7xJARpdKx5beWc2utRwNX2NhdthvO36hOvA/exec';
+    const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxjaIgBJIX85R-ap0GgRsufU3cvcLcoBA_LSA6FQQuVW6KtyUOaN-vhSR4B5COMyJmm/exec';
 
     const STORAGE_KEY_RECORDS = 'foodbonding_all_records_v2';
     const STORAGE_KEY_LEGACY = 'foodbonding_projects_v1';
-    const STORAGE_KEY_SCRIPT = 'foodbonding_script_url_v2';
+    const STORAGE_KEY_SCRIPT = 'foodbonding_script_url_v1';
     const STORAGE_KEY_PROFILE = 'foodbonding_invoice_profile_v1';
     const STORAGE_KEY_AUTH = 'foodbonding_logged_in_v1';
 
@@ -1908,38 +1750,16 @@
       document.getElementById('loginScriptUrl').value = getScriptUrl();
     }
 
-    function isAuthenticatedSession() {
-      try {
-        if (sessionStorage.getItem(STORAGE_KEY_AUTH) === 'true') return true;
-      } catch (_) {}
-      try {
-        if (localStorage.getItem(STORAGE_KEY_AUTH) === 'true') return true;
-      } catch (_) {}
-      return false;
-    }
-
-    function setAuthenticatedSession(active) {
-      const val = active ? 'true' : '';
-      try {
-        if (active) sessionStorage.setItem(STORAGE_KEY_AUTH, 'true');
-        else sessionStorage.removeItem(STORAGE_KEY_AUTH);
-      } catch (_) {}
-      try {
-        if (active) localStorage.setItem(STORAGE_KEY_AUTH, 'true');
-        else localStorage.removeItem(STORAGE_KEY_AUTH);
-      } catch (_) {}
-    }
-
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const u = (document.getElementById('loginUser').value || '').trim();
-      const p = document.getElementById('loginPass').value || '';
-      const scriptInput = (document.getElementById('loginScriptUrl').value || '').trim();
+      const u = document.getElementById('loginUser').value.trim();
+      const p = document.getElementById('loginPass').value;
+      const scriptInput = document.getElementById('loginScriptUrl').value.trim();
 
-      if (u.toLowerCase() === VALID_USER.toLowerCase() && p === VALID_PASS) {
-        const chosenUrl = scriptInput || target_url;
-        try { localStorage.setItem(STORAGE_KEY_SCRIPT, chosenUrl); } catch (_) {}
-        setAuthenticatedSession(true);
+      if (u === VALID_USER && p === VALID_PASS) {
+        if (scriptInput) localStorage.setItem(STORAGE_KEY_SCRIPT, scriptInput);
+        else if (!localStorage.getItem(STORAGE_KEY_SCRIPT)) localStorage.setItem(STORAGE_KEY_SCRIPT, DEFAULT_SCRIPT_URL);
+        sessionStorage.setItem(STORAGE_KEY_AUTH, 'true');
         document.getElementById('loginError').style.display = 'none';
         bootApp();
       } else {
@@ -1948,246 +1768,807 @@
     });
 
     function logout() {
-      setAuthenticatedSession(false);
+      sessionStorage.removeItem(STORAGE_KEY_AUTH);
       location.reload();
     }
 
-    function checkAndBootIfLoggedIn() {
-      try {
-        if (!localStorage.getItem(STORAGE_KEY_SCRIPT)) {
-          localStorage.setItem(STORAGE_KEY_SCRIPT, target_url);
-        }
-      } catch (_) {}
-      if (isAuthenticatedSession()) {
-        bootApp();
-      }
-    }
-
-    window.addEventListener('DOMContentLoaded', checkAndBootIfLoggedIn);
-    if (document.readyState === 'interactive' || document.readyState === 'complete') {
-      checkAndBootIfLoggedIn();
-    }
+    window.addEventListener('DOMContentLoaded', () => {
+      if (!localStorage.getItem(STORAGE_KEY_SCRIPT)) localStorage.setItem(STORAGE_KEY_SCRIPT, DEFAULT_SCRIPT_URL);
+      if (sessionStorage.getItem(STORAGE_KEY_AUTH) === 'true') bootApp();
+    });
 
     async function bootApp() {
-      const lv = document.getElementById('loginView');
-      const av = document.getElementById('appView');
-      if (lv) lv.style.setProperty('display', 'none', 'important');
-      if (av) av.style.setProperty('display', 'block', 'important');
-      try {
+      document.getElementById('loginView').style.display = 'none';
+      document.getElementById('appView').style.display = 'block';
 
       const cached = localStorage.getItem(STORAGE_KEY_RECORDS) || localStorage.getItem(STORAGE_KEY_LEGACY);
       if (cached) {
         try { allRecords = JSON.parse(cached); } catch (e) { allRecords = []; }
       }
-      if (typeof refreshAllUI === 'function') refreshAllUI();
-      if (typeof syncFromCloud === 'function') await syncFromCloud();
-      } catch (bootErr) {
-        console.warn('bootApp non-fatal error:', bootErr);
-      }
+      refreshAllUI();
+      await syncFromCloud();
     }
 
     // ==================== GOOGLE APPS SCRIPT CLOUD SYNC ====================
-    let isSyncingNow = false;
-    let lastSyncError = '';
-
-    function setSyncBadge(online, text, errDetail = '') {
-      lastSyncError = errDetail || '';
+    function setSyncBadge(online, text) {
       document.getElementById('syncDot').className = online ? 'dot' : 'dot offline';
       document.getElementById('syncStatusText').textContent = text;
     }
 
-    function compactProfileForCloud(prof) {
-      if (!prof) return null;
-      const copy = Object.assign({}, prof);
-      if (copy.qrImage === DEFAULT_QR_DATA_URI) {
-        copy.qrImage = '__DEFAULT__';
-      }
-      return copy;
-    }
-
-    function restoreProfileFromCloud(prof) {
-      if (!prof) return null;
-      const copy = Object.assign({}, prof);
-      if (!copy.qrImage || copy.qrImage === '__DEFAULT__') {
-        copy.qrImage = DEFAULT_QR_DATA_URI;
-      }
-      return copy;
-    }
-
-    async function manualSyncNow() {
-      if (lastSyncError) {
-        showToast('⚠️ ' + lastSyncError);
-      } else {
-        showToast('🔄 Syncing with Google Drive...');
-      }
-      if (allRecords.length > 0) {
-        await sendCloudMutation({
-          action: 'syncAll',
-          projects: allRecords,
-          profile: compactProfileForCloud(getInvoiceProfile())
-        });
-      } else {
-        await syncFromCloud();
-      }
-    }
-
-    const STRICT_GS_URL = 'https://script.google.com/macros/s/AKfycbwd103KnpeEDgMBDQXxRhOP3iOyFWAHZak7xJARpdKx5beWc2utRwNX2NhdthvO36hOvA/exec';
-
-    function normalizeExecUrl(rawUrl) {
-      const u = (rawUrl || '').trim();
-      if (!u) return '';
-      if (/^https?:\/\//i.test(u)) return u;
-      return 'https://' + u.replace(/^\/+/, '');
-    }
-
-    function parseAppsScriptResponse(text) {
-      if (!text) {
-        throw new Error('Empty response from Apps Script');
-      }
-      let trimmed = String(text).trim();
-      const jsonpMatch = trimmed.match(/^[a-zA-Z0-9_$]+\s*\(([\s\S]*?)\)\s*;?\s*$/);
-      if (jsonpMatch && jsonpMatch[1]) {
-        trimmed = jsonpMatch[1].trim();
-      }
-      trimmed = trimmed.replace(/^\)\]\}\'\s*\n?/, '').trim();
-      if (trimmed.startsWith('<')) {
-        if (trimmed.includes('ServiceLogin') || trimmed.includes('accounts.google.com')) {
-          throw new Error('Apps Script requires sign-in. Set "Who has access: Anyone" and redeploy.');
+    async function syncFromCloud() {
+      const url = getScriptUrl();
+      if (!url) { setSyncBadge(false, 'Local Mode'); return; }
+      setSyncBadge(true, 'Syncing...');
+      try {
+        const res = await fetch(`${url}?action=getAll`);
+        const data = await res.json();
+        if (data.status === 'success' && Array.isArray(data.projects)) {
+          allRecords = data.projects;
+          localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify(allRecords));
+          refreshAllUI();
+          setSyncBadge(true, 'Synced with Drive');
+        } else {
+          setSyncBadge(false, 'Sync Warning');
         }
-        throw new Error('Apps Script returned HTML instead of JSON. Check /exec URL & New Deployment.');
+      } catch (err) {
+        console.error(err);
+        setSyncBadge(false, 'Offline (Local Saved)');
       }
-      return JSON.parse(trimmed);
     }
 
-    function jsonpAppsScriptRequest(baseUrl, queryString, timeoutMs = 10000) {
-      return new Promise((resolve, reject) => {
-        const cbName = '__fbStrictCb_' + Date.now() + '_' + Math.floor(Math.random() * 1000000);
-        const script = document.createElement('script');
-        let settled = false;
+    async function sendCloudMutation(payload) {
+      localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify(allRecords));
+      refreshAllUI();
 
-        const cleanup = () => {
-          if (window[cbName]) {
-            try { delete window[cbName]; } catch (_) { window[cbName] = undefined; }
-          }
-          if (script && script.parentNode) {
-            script.parentNode.removeChild(script);
-          }
-        };
+      const url = getScriptUrl();
+      if (!url) return;
+      setSyncBadge(true, 'Saving...');
+      try {
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.status === 'success' && Array.isArray(data.projects)) {
+          allRecords = data.projects;
+          localStorage.setItem(STORAGE_KEY_RECORDS, JSON.stringify(allRecords));
+          refreshAllUI();
+        }
+        setSyncBadge(true, 'Synced with Drive');
+      } catch (err) {
+        console.error(err);
+        setSyncBadge(false, 'Saved Locally');
+      }
+    }
 
-        const timer = setTimeout(() => {
-          if (!settled) {
-            settled = true;
-            cleanup();
-            reject(new Error('Request timed out — check /exec URL, New Deployment, and "Who has access: Anyone"'));
-          }
-        }, timeoutMs);
+    // ==================== NAVIGATION & PRIVACY ====================
+    function switchTab(tabId, btn) {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      ['projectsTab', 'leadsTab', 'calendarTab', 'analyticsTab'].forEach(id => {
+        document.getElementById(id).style.display = id === tabId ? 'block' : 'none';
+      });
+      if (tabId === 'analyticsTab') renderAnalytics();
+      if (tabId === 'calendarTab') renderCalendar();
+      if (tabId === 'leadsTab') renderLeads();
+    }
 
-        window[cbName] = (data) => {
-          if (!settled) {
-            settled = true;
-            clearTimeout(timer);
-            cleanup();
-            if (!data || typeof data !== 'object') {
-              reject(new Error('Invalid response from Apps Script'));
-              return;
-            }
-            if (data.status === 'error') {
-              reject(new Error(data.message || 'Apps Script returned error'));
-              return;
-            }
-            resolve(data);
-          }
-        };
+    function togglePrivacyMask() {
+      isMasked = !isMasked;
+      document.getElementById('eyeLabel').textContent = isMasked ? '🙈 Show ₹' : '👁️ Hide ₹';
+      document.querySelectorAll('.money-val').forEach(el => el.classList.toggle('masked', isMasked));
+    }
 
-        script.onerror = () => {
-          if (!settled) {
-            settled = true;
-            clearTimeout(timer);
-            cleanup();
-            reject(new Error('Script load blocked — verify /exec URL, New Deployment, and "Who has access: Anyone"'));
-          }
-        };
+    function formatINR(num) {
+      return '₹' + (Number(num) || 0).toLocaleString('en-IN');
+    }
 
-        const sep = baseUrl.includes('?') ? '&' : '?';
-        script.src = `${baseUrl}${sep}${queryString}&callback=${cbName}&_ts=${Date.now()}`;
-        document.body.appendChild(script);
+    function formatCompactNum(num) {
+      const n = Number(num) || 0;
+      if (n >= 1000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+      if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+      return n.toLocaleString('en-IN');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    // ==================== DEADLINE & 48H SHOOT ALERT LOGIC ====================
+    function getCollabUrgency(p) {
+      if (p.status === 'Completed') return { type: 'none' };
+      const now = new Date();
+      const todayMid = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+      if (p.deadlineDate) {
+        const dl = new Date(p.deadlineDate + 'T00:00:00');
+        const diffDays = Math.round((dl - todayMid) / 86400000);
+        if (diffDays < 0) {
+          return { type: 'overdue', label: `🚨 Posting Deadline Overdue by ${Math.abs(diffDays)}d` };
+        }
+        if (diffDays === 0) {
+          return { type: 'upcoming', label: `⚡ Reel Posting Deadline is TODAY` };
+        }
+      }
+
+      if (p.shootDate) {
+        const sd = new Date(p.shootDate + 'T00:00:00');
+        const diffHours = (sd - todayMid) / 3600000;
+        if (diffHours >= 0 && diffHours <= 48) {
+          const dayTxt = diffHours < 24 ? 'TODAY' : 'TOMORROW';
+          return { type: 'upcoming', label: `🔥 Shoot Coming Up (${dayTxt})` };
+        }
+      }
+      return { type: 'none' };
+    }
+
+    // ==================== COLLABORATION CRUD ====================
+    function toggleFormReelField() {
+      const st = document.getElementById('projStatus').value;
+      document.getElementById('formReelWrap').style.display = st === 'Completed' ? 'block' : 'none';
+    }
+
+    function openProjectModal(projectId = null, prefillData = null) {
+      const form = document.getElementById('projectForm');
+      form.reset();
+      document.getElementById('projId').value = '';
+      document.getElementById('convertingLeadId').value = '';
+      document.getElementById('formReelWrap').style.display = 'none';
+
+      if (projectId) {
+        const p = allRecords.find(x => x.id === projectId);
+        if (!p) return;
+        document.getElementById('projectModalTitle').textContent = 'Edit Collaboration';
+        document.getElementById('projId').value = p.id;
+        document.getElementById('cafeName').value = p.cafeName || '';
+        document.getElementById('collabType').value = p.collabType || 'Paid';
+        document.getElementById('charges').value = p.charges || 0;
+        document.getElementById('pocName').value = p.pocName || '';
+        document.getElementById('pocContact').value = p.pocContact || '';
+        document.getElementById('locality').value = p.locality || '';
+        document.getElementById('paymentStatus').value = p.paymentStatus || 'Pending';
+        document.getElementById('shootDate').value = p.shootDate || '';
+        document.getElementById('deadlineDate').value = p.deadlineDate || '';
+        document.getElementById('deliverables').value = p.deliverables || '';
+        document.getElementById('projStatus').value = p.status || 'Ongoing';
+        document.getElementById('formReelLink').value = p.reelLink || '';
+        document.getElementById('formViews').value = p.views || '';
+        document.getElementById('formLikes').value = p.likes || '';
+        document.getElementById('formSaves').value = p.saves || '';
+        document.getElementById('formShares').value = p.shares || '';
+        document.getElementById('projNotes').value = p.notes || '';
+        toggleFormReelField();
+      } else if (prefillData) {
+        document.getElementById('projectModalTitle').textContent = prefillData._leadId ? 'Convert Pitch to Confirmed Collab' : 'New Cafe Collaboration';
+        document.getElementById('convertingLeadId').value = prefillData._leadId || '';
+        document.getElementById('cafeName').value = prefillData.cafeName || '';
+        document.getElementById('collabType').value = prefillData.collabType || 'Paid';
+        document.getElementById('charges').value = prefillData.charges || '';
+        document.getElementById('pocName').value = prefillData.pocName || '';
+        document.getElementById('pocContact').value = prefillData.pocContact || '';
+        document.getElementById('locality').value = prefillData.locality || '';
+        document.getElementById('shootDate').value = prefillData.shootDate || toISODate(new Date());
+        document.getElementById('projNotes').value = prefillData.notes || '';
+      } else {
+        document.getElementById('projectModalTitle').textContent = 'New Cafe / Restaurant Collaboration';
+        document.getElementById('shootDate').value = toISODate(new Date());
+      }
+
+      document.getElementById('projectModal').classList.add('open');
+    }
+
+    document.getElementById('projectForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const id = document.getElementById('projId').value;
+      const convertingLeadId = document.getElementById('convertingLeadId').value;
+      const status = document.getElementById('projStatus').value;
+
+      const payloadObj = {
+        id: id || 'FB-' + Date.now(),
+        recordType: 'collab',
+        cafeName: document.getElementById('cafeName').value.trim(),
+        collabType: document.getElementById('collabType').value,
+        charges: Number(document.getElementById('charges').value) || 0,
+        pocName: document.getElementById('pocName').value.trim(),
+        pocContact: document.getElementById('pocContact').value.trim(),
+        locality: document.getElementById('locality').value.trim(),
+        paymentStatus: document.getElementById('paymentStatus').value,
+        shootDate: document.getElementById('shootDate').value,
+        deadlineDate: document.getElementById('deadlineDate').value,
+        deliverables: document.getElementById('deliverables').value.trim(),
+        status: status,
+        reelLink: status === 'Completed' ? document.getElementById('formReelLink').value.trim() : '',
+        views: status === 'Completed' ? (Number(document.getElementById('formViews').value) || 0) : 0,
+        likes: status === 'Completed' ? (Number(document.getElementById('formLikes').value) || 0) : 0,
+        saves: status === 'Completed' ? (Number(document.getElementById('formSaves').value) || 0) : 0,
+        shares: status === 'Completed' ? (Number(document.getElementById('formShares').value) || 0) : 0,
+        notes: document.getElementById('projNotes').value.trim()
+      };
+
+      closeModal('projectModal');
+
+      if (convertingLeadId) {
+        allRecords = allRecords.filter(r => r.id !== convertingLeadId);
+        allRecords.unshift(payloadObj);
+        showToast(`🎉 Converted ${payloadObj.cafeName} to Confirmed Collab!`);
+        await sendCloudMutation({ action: 'syncAll', projects: allRecords });
+      } else if (id) {
+        const idx = allRecords.findIndex(p => p.id === id);
+        if (idx !== -1) allRecords[idx] = { ...allRecords[idx], ...payloadObj };
+        showToast('✓ Collaboration updated');
+        await sendCloudMutation({ action: 'update', project: payloadObj });
+      } else {
+        allRecords.unshift(payloadObj);
+        showToast('✓ New collaboration added');
+        await sendCloudMutation({ action: 'add', project: payloadObj });
+      }
+    });
+
+    function openCompleteModal(id) {
+      const p = allRecords.find(x => x.id === id);
+      if (!p) return;
+      document.getElementById('completeProjId').value = p.id;
+      document.getElementById('completeCafeTitle').textContent = p.cafeName;
+      document.getElementById('completeReelUrl').value = p.reelLink || '';
+      document.getElementById('completePaymentStatus').value =
+        p.collabType === 'Barter' ? 'Barter Redeemed' : (p.paymentStatus || 'Settled');
+      document.getElementById('compViews').value = p.views || '';
+      document.getElementById('compLikes').value = p.likes || '';
+      document.getElementById('compSaves').value = p.saves || '';
+      document.getElementById('compShares').value = p.shares || '';
+      document.getElementById('completeModal').classList.add('open');
+    }
+
+    document.getElementById('completeForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const id = document.getElementById('completeProjId').value;
+      const idx = allRecords.findIndex(p => p.id === id);
+      if (idx !== -1) {
+        const wasOngoing = allRecords[idx].status !== 'Completed';
+        allRecords[idx].status = 'Completed';
+        allRecords[idx].reelLink = document.getElementById('completeReelUrl').value.trim();
+        allRecords[idx].paymentStatus = document.getElementById('completePaymentStatus').value;
+        allRecords[idx].views = Number(document.getElementById('compViews').value) || 0;
+        allRecords[idx].likes = Number(document.getElementById('compLikes').value) || 0;
+        allRecords[idx].saves = Number(document.getElementById('compSaves').value) || 0;
+        allRecords[idx].shares = Number(document.getElementById('compShares').value) || 0;
+        if (!allRecords[idx].completedDate) {
+          allRecords[idx].completedDate = toISODate(new Date());
+        }
+        closeModal('completeModal');
+        showToast(wasOngoing ? '🎬 Reel published & archived!' : '📈 Reel metrics updated!');
+        await sendCloudMutation({ action: 'update', project: allRecords[idx] });
+      }
+    });
+
+    async function deleteRecord(id) {
+      if (!confirm('Remove this record permanently?')) return;
+      allRecords = allRecords.filter(p => p.id !== id);
+      showToast('Record removed');
+      await sendCloudMutation({ action: 'delete', id });
+    }
+
+    // ==================== INBOUND LEADS & PITCH PIPELINE ====================
+    function openLeadModal(leadId = null) {
+      const form = document.getElementById('leadForm');
+      form.reset();
+      document.getElementById('leadId').value = '';
+      if (leadId) {
+        const l = allRecords.find(x => x.id === leadId);
+        if (!l) return;
+        document.getElementById('leadModalTitle').textContent = 'Edit Cafe Pitch / Inquiry';
+        document.getElementById('leadId').value = l.id;
+        document.getElementById('leadCafeName').value = l.cafeName || '';
+        document.getElementById('leadPocName').value = l.pocName || '';
+        document.getElementById('leadPocContact').value = l.pocContact || '';
+        document.getElementById('leadLocality').value = l.locality || '';
+        document.getElementById('leadSource').value = l.source || 'Instagram DM';
+        document.getElementById('leadCollabType').value = l.collabType || 'Paid';
+        document.getElementById('leadQuotedAmount').value = l.charges || '';
+        document.getElementById('leadStage').value = l.stage || 'New Inquiry';
+        document.getElementById('leadLastContact').value = l.lastContact || '';
+        document.getElementById('leadNotes').value = l.notes || '';
+      } else {
+        document.getElementById('leadModalTitle').textContent = 'Log Incoming Cafe Pitch / Inquiry';
+        document.getElementById('leadLastContact').value = toISODate(new Date());
+      }
+      document.getElementById('leadModal').classList.add('open');
+    }
+
+    document.getElementById('leadForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const id = document.getElementById('leadId').value;
+      const leadObj = {
+        id: id || 'LEAD-' + Date.now(),
+        recordType: 'lead',
+        cafeName: document.getElementById('leadCafeName').value.trim(),
+        pocName: document.getElementById('leadPocName').value.trim(),
+        pocContact: document.getElementById('leadPocContact').value.trim(),
+        locality: document.getElementById('leadLocality').value.trim(),
+        source: document.getElementById('leadSource').value,
+        collabType: document.getElementById('leadCollabType').value,
+        charges: Number(document.getElementById('leadQuotedAmount').value) || 0,
+        stage: document.getElementById('leadStage').value,
+        lastContact: document.getElementById('leadLastContact').value,
+        notes: document.getElementById('leadNotes').value.trim()
+      };
+      closeModal('leadModal');
+      if (id) {
+        const idx = allRecords.findIndex(x => x.id === id);
+        if (idx !== -1) allRecords[idx] = { ...allRecords[idx], ...leadObj };
+        showToast('✓ Lead updated');
+        await sendCloudMutation({ action: 'update', project: leadObj });
+      } else {
+        allRecords.unshift(leadObj);
+        showToast('📩 Inquiry added to pipeline');
+        await sendCloudMutation({ action: 'add', project: leadObj });
+      }
+    });
+
+    function isLeadCold(lead) {
+      if (!lead.lastContact) return false;
+      const last = new Date(lead.lastContact + 'T00:00:00');
+      const diffDays = Math.floor((new Date() - last) / 86400000);
+      return diffDays >= 3;
+    }
+
+    function convertLeadToCollab(leadId) {
+      const l = allRecords.find(x => x.id === leadId);
+      if (!l) return;
+      openProjectModal(null, {
+        _leadId: l.id,
+        cafeName: l.cafeName,
+        collabType: l.collabType,
+        charges: l.charges,
+        pocName: l.pocName,
+        pocContact: l.pocContact,
+        locality: l.locality,
+        notes: l.notes
       });
     }
 
-    async function callAppsScriptGet(rawUrl, queryString) {
-      const url = normalizeExecUrl(rawUrl);
-      if (!url) throw new Error('Missing Google Apps Script URL');
-      try {
-        const sep = url.includes('?') ? '&' : '?';
-        const res = await fetch(`${url}${sep}${queryString}&_ts=${Date.now()}`, {
-          method: 'GET',
-          redirect: 'follow',
-          cache: 'no-store'
-        });
-        if (!res.ok) {
-          throw new Error(`HTTP ${res.status}`);
-        }
-        const rawText = await res.text();
-        return parseAppsScriptResponse(rawText);
-      } catch (fetchErr) {
-        return await jsonpAppsScriptRequest(url, queryString);
+    function renderLeads() {
+      const grid = document.getElementById('leadsGrid');
+      const leads = getLeads();
+      const q = document.getElementById('leadSearchInput').value.toLowerCase().trim();
+      const stageF = document.getElementById('leadStageFilter').value;
+
+      const filtered = leads.filter(l => {
+        const matchQ = !q || (l.cafeName || '').toLowerCase().includes(q) || (l.locality || '').toLowerCase().includes(q);
+        const matchStage = stageF === 'ALL' || (stageF === 'COLD' ? isLeadCold(l) : l.stage === stageF);
+        return matchQ && matchStage;
+      });
+
+      if (!filtered.length) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <h3 style="font-size:1.45rem; color:var(--gold-light); margin-bottom:6px;">No Pitches in This View</h3>
+            <p>Click <strong>+ Log New Inquiry / Pitch</strong> to track incoming DMs and manager calls.</p>
+          </div>`;
+        return;
       }
+
+      grid.innerHTML = filtered.map(l => {
+        const cold = isLeadCold(l);
+        return `
+          <article class="project-card ${cold ? 'alert-upcoming' : ''}">
+            <div>
+              ${cold ? `<div class="alert-ribbon ribbon-upcoming">⏰ Needs Follow-up (Last contact: ${escapeHtml(l.lastContact)})</div>` : ''}
+              <div class="card-top">
+                <div>
+                  <h3 class="cafe-name">${escapeHtml(l.cafeName)}</h3>
+                  <div class="locality-tag">📍 ${escapeHtml(l.locality || 'Area TBD')} • via ${escapeHtml(l.source || 'DM')}</div>
+                </div>
+                <div class="badges">
+                  <span class="badge badge-barter">${escapeHtml(l.stage || 'New Inquiry')}</span>
+                  ${cold ? `<span class="badge badge-cold">Follow Up</span>` : ''}
+                </div>
+              </div>
+
+              <div class="card-details" style="margin-top:12px;">
+                <div>
+                  <span class="detail-label">Quoted Value (${escapeHtml(l.collabType)})</span>
+                  <span class="detail-val money-val ${isMasked ? 'masked' : ''}" style="color:var(--gold-light);">${formatINR(l.charges)}</span>
+                </div>
+                <div>
+                  <span class="detail-label">Last Contact</span>
+                  <span class="detail-val">${escapeHtml(l.lastContact || '—')}</span>
+                </div>
+                <div>
+                  <span class="detail-label">POC Name</span>
+                  <span class="detail-val">${escapeHtml(l.pocName || '—')}</span>
+                </div>
+                <div>
+                  <span class="detail-label">Contact / IG</span>
+                  <span class="detail-val">${escapeHtml(l.pocContact || '—')}</span>
+                </div>
+              </div>
+              ${l.notes ? `<div style="font-size:0.8rem; color:var(--text-muted); margin-top:8px;">📝 ${escapeHtml(l.notes)}</div>` : ''}
+            </div>
+
+            <div class="card-actions">
+              <button class="btn-success" onclick="convertLeadToCollab('${l.id}')">✨ Convert to Confirmed Collab</button>
+              <div class="action-cluster">
+                <button class="btn-wa" onclick="openWhatsAppModal('${l.id}')">💬 WA</button>
+                <button class="btn-secondary" style="padding:7px 10px; font-size:0.78rem;" onclick="openLeadModal('${l.id}')">Edit</button>
+                <button class="btn-danger" onclick="deleteRecord('${l.id}')">✕</button>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join('');
     }
 
-    async function testScriptConnection(inputId, statusId) {
-      const inputEl = document.getElementById(inputId);
-      const statusEl = document.getElementById(statusId);
-      const url = normalizeExecUrl(inputEl ? inputEl.value : '');
-      if (inputEl && url) inputEl.value = url;
+    // ==================== ONE-CLICK WHATSAPP TEMPLATES ====================
+    function extractDigits(str) {
+      const digits = String(str || '').replace(/\D/g, '');
+      if (digits.length === 10) return '91' + digits;
+      return digits;
+    }
 
-      if (!url) {
-        statusEl.style.color = '#fca5a5';
-        statusEl.textContent = '❌ Please enter a valid Google Apps Script /exec URL first.';
-        return false;
-      }
-      if (!/\/macros\/s\/[a-zA-Z0-9-_]+\/exec(\?.*)?$/.test(url)) {
-        statusEl.style.color = '#fca5a5';
-        statusEl.textContent = '❌ Invalid URL. Must end with /exec (Google Apps Script Web App URL).';
-        return false;
-      }
+    function openWhatsAppModal(recordId) {
+      const rec = allRecords.find(x => x.id === recordId);
+      if (!rec) return;
 
-      statusEl.style.color = '#f3d5b0';
-      statusEl.textContent = '⏳ Strictly testing connection to Google Drive database...';
-      try {
-        const data = await callAppsScriptGet(url, 'action=getAll');
-        if (data && data.status === 'success') {
-          const count = Array.isArray(data.projects) ? data.projects.length : 0;
-          statusEl.style.color = '#6ee7b7';
-          statusEl.textContent = `✅ Connected! Drive database reachable (${count} project record(s) found).`;
-          return true;
-        } else {
-          statusEl.style.color = '#fde047';
-          statusEl.textContent = '⚠️ Connected, but unexpected response: ' + ((data && data.message) || 'Check script code');
-          return false;
+      const phone = extractDigits(rec.pocContact);
+      document.getElementById('waPhoneInput').value = phone;
+
+      const poc = rec.pocName ? rec.pocName : 'there';
+      const cafe = rec.cafeName || 'your cafe';
+      const shootDt = rec.shootDate || 'our scheduled date';
+      const reelUrl = rec.reelLink || '[Reel Link]';
+      const amt = formatINR(rec.charges);
+
+      const templates = [
+        {
+          title: '1. Shoot Day Confirmation',
+          text: `Hi ${poc}! This is Roshni from *Foodbonding* ✨ Confirming our collaboration shoot at *${cafe}* on *${shootDt}* (${rec.deliverables || 'Instagram Reel & Stories'}). Looking forward to visiting!`
+        },
+        {
+          title: '2. Share Live Instagram Reel Link',
+          text: `Hi ${poc}! Our collaboration Reel for *${cafe}* is now LIVE on *Foodbonding* 🎬✨ Check it out here: ${reelUrl}\n\nThank you for hosting us!`
+        },
+        {
+          title: '3. Polite Payment Follow-up',
+          text: `Hi ${poc}, hope you're doing great! Sharing a gentle follow-up regarding the pending collaboration invoice of *${amt}* for *${cafe}*. Let me know once processed. Thank you! — Roshni (*Foodbonding*)`
+        },
+        {
+          title: '4. Rate Card / Inquiry Follow-up',
+          text: `Hi ${poc}! Following up from *Foodbonding* regarding our food & lifestyle collaboration for *${cafe}*. Let me know if you'd like to lock in dates this week!`
         }
-      } catch (err) {
-        statusEl.style.color = '#fca5a5';
-        statusEl.textContent = '❌ Connection failed: ' + (err && err.message ? err.message : 'Check URL and "Who has access: Anyone"');
-        return false;
-      }
-    }e Apps Script URL saved');
-      if (allRecords.length > 0) {
-        await sendCloudMutation({
-          action: 'syncAll',
-          projects: allRecords,
-          profile: compactProfileForCloud(getInvoiceProfile())
-        });
+      ];
+
+      const listEl = document.getElementById('waTemplatesList');
+      listEl.innerHTML = templates.map((t, idx) => `
+        <div class="wa-template-btn">
+          <div style="display:flex; justify-content:space-between; align-items:center; gap:8px;">
+            <strong>${t.title}</strong>
+            <div style="display:flex; gap:6px;">
+              <button type="button" class="btn-secondary" style="padding:4px 9px; font-size:0.74rem;" onclick="copyWaText(${idx})">Copy</button>
+              <button type="button" class="btn-wa" style="padding:4px 10px; font-size:0.74rem;" onclick="launchWhatsApp(${idx})">Send on WhatsApp ↗</button>
+            </div>
+          </div>
+          <p id="waTplText_${idx}">${escapeHtml(t.text)}</p>
+        </div>
+      `).join('');
+
+      window._activeWaTemplates = templates;
+      document.getElementById('whatsappModal').classList.add('open');
+    }
+
+    function copyWaText(idx) {
+      const txt = window._activeWaTemplates[idx].text;
+      navigator.clipboard.writeText(txt);
+      showToast('📋 Message copied to clipboard');
+    }
+
+    function launchWhatsApp(idx) {
+      const txt = encodeURIComponent(window._activeWaTemplates[idx].text);
+      const rawPhone = document.getElementById('waPhoneInput').value.replace(/\D/g, '');
+      const url = rawPhone ? `https://wa.me/${rawPhone}?text=${txt}` : `https://wa.me/?text=${txt}`;
+      window.open(url, '_blank', 'noopener');
+    }
+
+    // ==================== BRANDED PDF INVOICE GENERATOR ====================
+    function openInvoiceModal(collabId) {
+      const p = allRecords.find(x => x.id === collabId);
+      if (!p) return;
+      const prof = getInvoiceProfile();
+
+      const invNum = 'INV-' + (p.id || 'FB').replace(/[^A-Z0-9]/gi, '').slice(-6).toUpperCase();
+      document.getElementById('invCreatorMeta').textContent = prof.creatorMeta;
+      document.getElementById('invNumber').textContent = `Invoice #: ${invNum}`;
+      document.getElementById('invDate').textContent = `Issued: ${toISODate(new Date())}`;
+
+      document.getElementById('invClientName').textContent = p.cafeName || 'Client';
+      document.getElementById('invClientPoc').textContent = p.pocName ? `Attn: ${p.pocName} ${p.pocContact ? '(' + p.pocContact + ')' : ''}` : '';
+      document.getElementById('invClientLoc').textContent = p.locality ? `Location: ${p.locality}` : '';
+
+      document.getElementById('invCollabType').textContent = `${p.collabType} Collaboration`;
+      document.getElementById('invShootDate').textContent = `Shoot Date: ${p.shootDate || 'As Scheduled'}`;
+      document.getElementById('invPayStatus').textContent = `Payment State: ${p.paymentStatus || 'Pending'}`;
+
+      document.getElementById('invDeliverables').textContent = p.deliverables || '1 Instagram Reel + Stories';
+      document.getElementById('invNotesRow').textContent = p.notes || '';
+      document.getElementById('invTypeCell').textContent = p.collabType;
+      document.getElementById('invAmountCell').textContent = formatINR(p.charges);
+      document.getElementById('invTotalBig').textContent = formatINR(p.charges);
+
+      // Populate all 4 payment options cleanly
+      const qrImg = document.getElementById('invQrImg');
+      qrImg.src = prof.qrImage || DEFAULT_QR_DATA_URI;
+
+      const upiIdVal = (prof.upiId || '').trim();
+      document.getElementById('invUpiIdVal').textContent = upiIdVal || 'Scan QR or see bank details';
+
+      const upiNumVal = (prof.upiNumber || '').trim();
+      document.getElementById('invUpiNumBox').style.display = upiNumVal ? 'block' : 'none';
+      document.getElementById('invUpiNumVal').textContent = upiNumVal;
+      if (!upiNumVal) {
+        document.getElementById('invUpiIdBox').classList.add('full');
       } else {
-        await syncFromCloud();
+        document.getElementById('invUpiIdBox').classList.remove('full');
       }
+
+      const bankVal = (prof.bankDetails || prof.bankExtra || '').trim();
+      document.getElementById('invBankBox').style.display = bankVal ? 'block' : 'none';
+      document.getElementById('invBankVal').textContent = bankVal;
+
+      document.getElementById('invThankYouBlock').textContent = prof.thankYou || DEFAULT_THANK_YOU;
+
+      window._activeInvoiceCafe = (p.cafeName || 'Cafe').replace(/[^a-z0-9]/gi, '_');
+      document.getElementById('invoiceModal').classList.add('open');
+    }
+
+    function downloadInvoicePDF() {
+      const original = document.getElementById('invoiceSheet');
+      const filename = `Foodbonding_Invoice_${window._activeInvoiceCafe || 'Collab'}.pdf`;
+      showToast('⏳ Generating branded PDF invoice...');
+
+      const targetW = 720;
+      const stage = document.createElement('div');
+      stage.style.position = 'fixed';
+      stage.style.top = '0';
+      stage.style.left = '0';
+      stage.style.width = targetW + 'px';
+      stage.style.zIndex = '-9999';
+      stage.style.pointerEvents = 'none';
+      stage.style.background = '#1b130c';
+      stage.style.margin = '0';
+      stage.style.padding = '0';
+
+      const clone = original.cloneNode(true);
+      clone.removeAttribute('id');
+      clone.classList.add('invoice-pdf-clone');
+      clone.style.width = targetW + 'px';
+      clone.style.maxWidth = targetW + 'px';
+      clone.style.margin = '0';
+      stage.appendChild(clone);
+      document.body.appendChild(stage);
+
+      const exactH = Math.ceil(clone.getBoundingClientRect().height);
+      const pxToMm = 0.264583;
+      const pdfW = Number((targetW * pxToMm).toFixed(2));
+      const pdfH = Number((exactH * pxToMm).toFixed(2));
+
+      const opt = {
+        margin: 0,
+        filename: filename,
+        image: { type: 'jpeg', quality: 0.99 },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          backgroundColor: '#1b130c',
+          scrollX: 0,
+          scrollY: 0,
+          x: 0,
+          y: 0,
+          windowWidth: targetW,
+          width: targetW,
+          height: exactH
+        },
+        jsPDF: {
+          unit: 'mm',
+          format: [pdfW, pdfH],
+          orientation: pdfW > pdfH ? 'landscape' : 'portrait'
+        }
+      };
+
+      html2pdf().set(opt).from(clone).save().then(() => {
+        if (stage.parentNode) document.body.removeChild(stage);
+        showToast('✅ Edge-to-edge PDF Invoice downloaded!');
+      }).catch(err => {
+        console.error(err);
+        if (stage.parentNode) document.body.removeChild(stage);
+        showToast('⚠️ Error generating PDF');
+      });
+    }
+
+    // ==================== SHOOT CALENDAR ====================
+    function changeCalMonth(delta) {
+      calCurrentDate = new Date(calCurrentDate.getFullYear(), calCurrentDate.getMonth() + delta, 1);
+      renderCalendar();
+    }
+
+    function resetCalToday() {
+      calCurrentDate = new Date();
+      calSelectedDateStr = toISODate(new Date());
+      renderCalendar();
+    }
+
+    function scheduleOnSelectedDate() {
+      openProjectModal(null, { shootDate: calSelectedDateStr });
+    }
+
+    function renderCalendar() {
+      const year = calCurrentDate.getFullYear();
+      const month = calCurrentDate.getMonth();
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      document.getElementById('calMonthTitle').textContent = `${monthNames[month]} ${year}`;
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const todayStr = toISODate(new Date());
+      const collabs = getCollabs();
+
+      const grid = document.getElementById('calDaysGrid');
+      let cellsHtml = '';
+
+      for (let i = 0; i < firstDay; i++) {
+        cellsHtml += `<div class="cal-day empty"></div>`;
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const shoots = collabs.filter(c => c.shootDate === dateStr);
+        const deadlines = collabs.filter(c => c.deadlineDate === dateStr);
+
+        const isToday = dateStr === todayStr ? 'today' : '';
+        const isSel = dateStr === calSelectedDateStr ? 'selected' : '';
+
+        const pills = [
+          ...shoots.map(s => `<div class="cal-pill cal-pill-shoot">🎥 ${escapeHtml(s.cafeName)}</div>`),
+          ...deadlines.map(dl => `<div class="cal-pill cal-pill-deadline">⏰ ${escapeHtml(dl.cafeName)}</div>`)
+        ].slice(0, 2).join('');
+
+        cellsHtml += `
+          <div class="cal-day ${isToday} ${isSel}" onclick="selectCalDay('${dateStr}')">
+            <span class="cal-num">${d}</span>
+            <div class="cal-events-dots">${pills}</div>
+          </div>
+        `;
+      }
+      grid.innerHTML = cellsHtml;
+      renderSelectedDayDetails();
+    }
+
+    function selectCalDay(dateStr) {
+      calSelectedDateStr = dateStr;
+      renderCalendar();
+    }
+
+    function renderSelectedDayDetails() {
+      document.getElementById('selectedDateHeading').textContent = `Schedule: ${calSelectedDateStr}`;
+      const collabs = getCollabs();
+      const shoots = collabs.filter(c => c.shootDate === calSelectedDateStr);
+      const deadlines = collabs.filter(c => c.deadlineDate === calSelectedDateStr);
+      const container = document.getElementById('selectedDateEvents');
+
+      if (!shoots.length && !deadlines.length) {
+        container.innerHTML = `<div class="insight-item"><span>No shoots or posting deadlines on this date. Click <strong>+ Book Shoot</strong> to schedule one.</span></div>`;
+        return;
+      }
+
+      let html = '';
+      shoots.forEach(s => {
+        html += `
+          <div class="insight-item">
+            <div>
+              <strong>🎥 Shoot: ${escapeHtml(s.cafeName)}</strong><br/>
+              <span>📍 ${escapeHtml(s.locality || 'Location TBD')} • ${escapeHtml(s.collabType)} (${formatINR(s.charges)})</span>
+            </div>
+            <button class="btn-secondary" style="padding:5px 10px; font-size:0.76rem;" onclick="openProjectModal('${s.id}')">Open</button>
+          </div>`;
+      });
+      deadlines.forEach(dl => {
+        html += `
+          <div class="insight-item" style="border-color:rgba(217,107,67,0.45);">
+            <div>
+              <strong style="color:#fca5a5;">⏰ Posting Deadline: ${escapeHtml(dl.cafeName)}</strong><br/>
+              <span>Status: ${escapeHtml(dl.status)} • ${escapeHtml(dl.deliverables || 'Reel')}</span>
+            </div>
+            <button class="btn-success" style="padding:5px 10px; font-size:0.76rem;" onclick="openCompleteModal('${dl.id}')">Publish</button>
+          </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    // ==================== ONE-CLICK CSV / EXCEL EXPORT ====================
+    function openExportModal() {
+      document.getElementById('exportMonthVal').value = toISODate(new Date()).slice(0, 7);
+      document.getElementById('exportModal').classList.add('open');
+    }
+
+    function toggleExportSubInputs() {
+      const scope = document.getElementById('exportScope').value;
+      document.getElementById('exportMonthWrap').style.display = scope === 'MONTH' ? 'block' : 'none';
+      document.getElementById('exportFyWrap').style.display = scope === 'FY' ? 'block' : 'none';
+    }
+
+    function runCsvExport() {
+      const scope = document.getElementById('exportScope').value;
+      let rows = getCollabs();
+
+      if (scope === 'MONTH') {
+        const m = document.getElementById('exportMonthVal').value;
+        rows = rows.filter(r => (r.shootDate || r.completedDate || '').startsWith(m));
+      } else if (scope === 'FY') {
+        const fyStartYear = Number(document.getElementById('exportFyVal').value);
+        const startStr = `${fyStartYear}-04-01`;
+        const endStr = `${fyStartYear + 1}-03-31`;
+        rows = rows.filter(r => {
+          const d = r.shootDate || r.completedDate || '';
+          return d >= startStr && d <= endStr;
+        });
+      }
+
+      if (!rows.length) {
+        alert('No collaborations found in the selected period.');
+        return;
+      }
+
+      const headers = [
+        'Collab ID', 'Cafe/Restaurant Name', 'Locality', 'Type', 'Charges/Value (INR)',
+        'Payment Status', 'POC Name', 'POC Contact', 'Shoot Date', 'Posting Deadline',
+        'Project Status', 'Reel Link', 'Views', 'Likes', 'Saves', 'Shares', 'Notes'
+      ];
+
+      const csvLines = [headers.join(',')];
+      rows.forEach(r => {
+        const vals = [
+          r.id, r.cafeName, r.locality, r.collabType, r.charges || 0,
+          r.paymentStatus, r.pocName, r.pocContact, r.shootDate, r.deadlineDate,
+          r.status, r.reelLink, r.views || 0, r.likes || 0, r.saves || 0, r.shares || 0, r.notes
+        ].map(v => `"${String(v ?? '').replace(/"/g, '""')}"`);
+        csvLines.push(vals.join(','));
+      });
+
+      const blob = new Blob(['\uFEFF' + csvLines.join('\n')], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = `Foodbonding_Accounting_${scope}_${toISODate(new Date())}.csv`;
+      link.click();
+      closeModal('exportModal');
+      showToast(`📊 Exported ${rows.length} rows to CSV`);
+    }
+
+    // ==================== STUDIO & INVOICE SETTINGS ====================
+    let pendingQrDataUri = null;
+
+    function handleQrUpload(e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        pendingQrDataUri = evt.target.result;
+        document.getElementById('setQrPreview').src = pendingQrDataUri;
+        showToast('📷 New QR image ready — click Save Settings');
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function resetDefaultQr() {
+      pendingQrDataUri = DEFAULT_QR_DATA_URI;
+      document.getElementById('setQrPreview').src = DEFAULT_QR_DATA_URI;
+      document.getElementById('setQrFile').value = '';
+      showToast('Restored default UPI QR');
     }
 
     function openSettingsModal() {
       const prof = getInvoiceProfile();
       pendingQrDataUri = prof.qrImage || DEFAULT_QR_DATA_URI;
       document.getElementById('settingsScriptUrl').value = getScriptUrl();
-      document.getElementById('settingsUrlStatus').textContent = 'Current URL: ' + getScriptUrl();
-      document.getElementById('settingsUrlStatus').style.color = 'var(--text-muted)';
       document.getElementById('setCreatorHandle').value = prof.creatorMeta;
       document.getElementById('setQrPreview').src = pendingQrDataUri;
       document.getElementById('setQrFile').value = '';
@@ -2213,18 +2594,14 @@
       localStorage.setItem(STORAGE_KEY_PROFILE, JSON.stringify(prof));
       closeModal('settingsModal');
       showToast('✅ Studio & invoice settings saved');
-      await sendCloudMutation({ action: 'saveProfile', profile: prof });
+      await syncFromCloud();
     }
 
     async function pushLocalToCloud() {
       const url = document.getElementById('settingsScriptUrl').value.trim() || DEFAULT_SCRIPT_URL;
       localStorage.setItem(STORAGE_KEY_SCRIPT, url);
       closeModal('settingsModal');
-      await sendCloudMutation({
-        action: 'syncAll',
-        projects: allRecords,
-        profile: getInvoiceProfile()
-      });
+      await sendCloudMutation({ action: 'syncAll', projects: allRecords });
       showToast('☁️ Backup synced to Google Drive');
     }
 
@@ -2549,23 +2926,6 @@
     function escapeAttr(str) {
       return String(str || '').replace(/"/g, '&quot;');
     }
-  
-    window.__FB_EXEC_URL__ = 'https://script.google.com/macros/s/AKfycbwd103KnpeEDgMBDQXxRhOP3iOyFWAHZak7xJARpdKx5beWc2utRwNX2NhdthvO36hOvA/exec';
-    window.fbForceOpenApp = function() {
-      try { sessionStorage.setItem('foodbonding_logged_in_v1', 'true'); } catch (_) {}
-      try { localStorage.setItem('foodbonding_logged_in_v1', 'true'); } catch (_) {}
-      try { localStorage.setItem('foodbonding_script_url_v7', window.__FB_EXEC_URL__); } catch (_) {}
-      const lv = document.getElementById('loginView');
-      const av = document.getElementById('appView');
-      if (lv) lv.style.setProperty('display', 'none', 'important');
-      if (av) av.style.setProperty('display', 'block', 'important');
-      if (typeof refreshAllUI === 'function') {
-        try { refreshAllUI(); } catch (_) {}
-      }
-      if (typeof syncFromCloud === 'function') {
-        try { syncFromCloud(); } catch (_) {}
-      }
-    };
-</script>
+  </script>
 </body>
 </html>
